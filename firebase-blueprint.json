@@ -1,0 +1,254 @@
+{
+  "entities": {
+    "UserProfile": {
+      "title": "UserProfile",
+      "description": "Student profile and overall attendance settings",
+      "type": "object",
+      "properties": {
+        "userId": {
+          "type": "string",
+          "maxLength": 128,
+          "description": "Firebase Auth UID"
+        },
+        "email": {
+          "type": "string",
+          "maxLength": 256,
+          "description": "Student email address"
+        },
+        "displayName": {
+          "type": "string",
+          "maxLength": 100,
+          "description": "Student full name"
+        },
+        "college": {
+          "type": "string",
+          "maxLength": 150,
+          "description": "College or university name"
+        },
+        "semester": {
+          "type": "string",
+          "maxLength": 50,
+          "description": "Current semester or term"
+        },
+        "rollNumber": {
+          "type": "string",
+          "maxLength": 50,
+          "description": "Student ID or Roll Number"
+        },
+        "minAttendance": {
+          "type": "number",
+          "description": "Minimum required attendance percentage (e.g. 75)"
+        },
+        "theme": {
+          "type": "string",
+          "maxLength": 10,
+          "description": "Theme preference: light or dark"
+        },
+        "createdAt": {
+          "type": "string",
+          "maxLength": 64,
+          "description": "ISO timestamp of creation"
+        },
+        "updatedAt": {
+          "type": "string",
+          "maxLength": 64,
+          "description": "ISO timestamp of last update"
+        }
+      },
+      "required": ["userId", "displayName", "minAttendance"]
+    },
+    "Subject": {
+      "title": "Subject",
+      "description": "Academic course or subject tracked by the student",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "maxLength": 128,
+          "description": "Unique subject identifier"
+        },
+        "userId": {
+          "type": "string",
+          "maxLength": 128,
+          "description": "Owner student UID"
+        },
+        "name": {
+          "type": "string",
+          "maxLength": 100,
+          "description": "Subject name"
+        },
+        "code": {
+          "type": "string",
+          "maxLength": 30,
+          "description": "Subject course code"
+        },
+        "attended": {
+          "type": "number",
+          "description": "Classes attended count"
+        },
+        "total": {
+          "type": "number",
+          "description": "Total conducted classes count"
+        },
+        "cancelled": {
+          "type": "number",
+          "description": "Total cancelled classes count"
+        },
+        "minAttendance": {
+          "type": "number",
+          "description": "Minimum required attendance percentage for this subject"
+        },
+        "room": {
+          "type": "string",
+          "maxLength": 60,
+          "description": "Default classroom or lab"
+        },
+        "faculty": {
+          "type": "string",
+          "maxLength": 100,
+          "description": "Teacher or professor name"
+        },
+        "createdAt": {
+          "type": "string",
+          "maxLength": 64,
+          "description": "ISO timestamp of creation"
+        },
+        "updatedAt": {
+          "type": "string",
+          "maxLength": 64,
+          "description": "ISO timestamp of last update"
+        }
+      },
+      "required": ["id", "userId", "name", "attended", "total"]
+    },
+    "AttendanceRecord": {
+      "title": "AttendanceRecord",
+      "description": "Individual attendance log entry for a class session",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "maxLength": 128,
+          "description": "Unique record identifier"
+        },
+        "userId": {
+          "type": "string",
+          "maxLength": 128,
+          "description": "Owner student UID"
+        },
+        "subjectId": {
+          "type": "string",
+          "maxLength": 128,
+          "description": "Referenced subject identifier"
+        },
+        "subjectName": {
+          "type": "string",
+          "maxLength": 100,
+          "description": "Subject name snapshot"
+        },
+        "date": {
+          "type": "string",
+          "maxLength": 20,
+          "description": "Date formatted YYYY-MM-DD"
+        },
+        "time": {
+          "type": "string",
+          "maxLength": 30,
+          "description": "Time of class"
+        },
+        "status": {
+          "type": "string",
+          "enum": ["present", "absent", "cancelled"],
+          "description": "Attendance status"
+        },
+        "note": {
+          "type": "string",
+          "maxLength": 200,
+          "description": "Optional note"
+        },
+        "createdAt": {
+          "type": "string",
+          "maxLength": 64,
+          "description": "ISO timestamp of creation"
+        }
+      },
+      "required": ["id", "userId", "subjectId", "date", "status"]
+    },
+    "TimetableSlot": {
+      "title": "TimetableSlot",
+      "description": "Weekly recurring timetable schedule slot",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "maxLength": 128,
+          "description": "Unique slot identifier"
+        },
+        "userId": {
+          "type": "string",
+          "maxLength": 128,
+          "description": "Owner student UID"
+        },
+        "day": {
+          "type": "string",
+          "enum": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+          "description": "Day of the week"
+        },
+        "subjectId": {
+          "type": "string",
+          "maxLength": 128,
+          "description": "Subject ID"
+        },
+        "subjectName": {
+          "type": "string",
+          "maxLength": 100,
+          "description": "Subject name"
+        },
+        "startTime": {
+          "type": "string",
+          "maxLength": 20,
+          "description": "Start time e.g. 09:00 AM"
+        },
+        "endTime": {
+          "type": "string",
+          "maxLength": 20,
+          "description": "End time e.g. 10:00 AM"
+        },
+        "room": {
+          "type": "string",
+          "maxLength": 60,
+          "description": "Room number"
+        },
+        "faculty": {
+          "type": "string",
+          "maxLength": 100,
+          "description": "Faculty name"
+        },
+        "createdAt": {
+          "type": "string",
+          "maxLength": 64,
+          "description": "ISO timestamp of creation"
+        }
+      },
+      "required": ["id", "userId", "day", "subjectId", "startTime"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": "UserProfile",
+      "description": "Stores user profile and attendance preferences"
+    },
+    "/users/{userId}/subjects/{subjectId}": {
+      "schema": "Subject",
+      "description": "Stores subjects and aggregated attendance numbers for the user"
+    },
+    "/users/{userId}/attendanceRecords/{recordId}": {
+      "schema": "AttendanceRecord",
+      "description": "Stores daily attendance history marked by the user"
+    },
+    "/users/{userId}/timetable/{slotId}": {
+      "schema": "TimetableSlot",
+      "description": "Stores weekly timetable class slots for the user"
+    }
+  }
+}

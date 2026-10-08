@@ -1,0 +1,8 @@
+{
+  "name": "Smart Attendance & Safe Bunk Planner",
+  "description": "Track college attendance, calculate safe bunks, predict recovery requirements, manage weekly timetables, and simulate what-if attendance scenarios.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
